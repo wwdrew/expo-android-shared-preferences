@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-android-shared-preferences": ["../src/index"],
+      "expo-android-shared-preferences/*": ["../src/*"]
+    }
+  }
+}
