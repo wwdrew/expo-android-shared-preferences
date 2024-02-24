@@ -1,9 +1,10 @@
 {
-  "platforms": ["ios", "android", "web"],
-  "ios": {
-    "modules": ["ExpoAndroidSharedPreferencesModule"]
-  },
+  "platforms": [
+    "android"
+  ],
   "android": {
-    "modules": ["expo.modules.androidsharedpreferences.ExpoAndroidSharedPreferencesModule"]
+    "modules": [
+      "expo.modules.androidsharedpreferences.ExpoAndroidSharedPreferencesModule"
+    ]
   }
 }

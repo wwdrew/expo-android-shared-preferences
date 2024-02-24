@@ -34,14 +34,5 @@ class ExpoAndroidSharedPreferencesModule : Module() {
         "value" to value
       ))
     }
-
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
-    View(ExpoAndroidSharedPreferencesView::class) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { view: ExpoAndroidSharedPreferencesView, prop: String ->
-        println(prop)
-      }
-    }
   }
 }
