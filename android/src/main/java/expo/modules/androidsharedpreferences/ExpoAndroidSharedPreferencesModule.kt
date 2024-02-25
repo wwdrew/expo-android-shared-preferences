@@ -1,38 +1,44 @@
 package expo.modules.androidsharedpreferences
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
 class ExpoAndroidSharedPreferencesModule : Module() {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
+
+  private val context
+    get() = requireNotNull(appContext.reactContext)
+
+  private val sharedPreferences by lazy {
+    context.getSharedPreferences("${context.packageName}_preferences", Context.MODE_PRIVATE)
+  }
+
+  private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+    val value = sharedPreferences.getString(key, null)
+
+    sendEvent("onChange", mapOf(
+      "key" to key,
+      "value" to value
+    ))
+  }
   override fun definition() = ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('ExpoAndroidSharedPreferences')` in JavaScript.
+
     Name("ExpoAndroidSharedPreferences")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
-
-    // Defines event names that the module can send to JavaScript.
     Events("onChange")
 
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
+    OnCreate {
+      sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { value: String ->
-      // Send an event to JavaScript.
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
+    Function("get") { key: String ->
+      sharedPreferences.getString(key, null)
+    }
+
+    Function("set") { key: String, value: String ->
+      sharedPreferences.edit().putString(key, value).apply()
     }
   }
 }
