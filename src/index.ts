@@ -1,13 +1,9 @@
-import {
-  NativeModulesProxy,
-  EventEmitter,
-  Subscription,
-} from "expo-modules-core";
+import { EventEmitter, Subscription } from "expo-modules-core";
 
-// Import the native module. On web, it will be resolved to ExpoAndroidSharedPreferences.web.ts
-// and on native platforms to ExpoAndroidSharedPreferences.ts
 import { ChangeEventPayload } from "./ExpoAndroidSharedPreferences.types";
 import ExpoAndroidSharedPreferencesModule from "./ExpoAndroidSharedPreferencesModule";
+
+export { useSharedPreferences } from "./useSharedPreferences";
 
 export function get(key: string): string {
   return ExpoAndroidSharedPreferencesModule.get(key);
@@ -17,10 +13,7 @@ export function set(key: string, value: string): void {
   ExpoAndroidSharedPreferencesModule.set(key, value);
 }
 
-const emitter = new EventEmitter(
-  ExpoAndroidSharedPreferencesModule ??
-    NativeModulesProxy.ExpoAndroidSharedPreferences,
-);
+const emitter = new EventEmitter(ExpoAndroidSharedPreferencesModule);
 
 export function addChangeListener(
   listener: (event: ChangeEventPayload) => void,
