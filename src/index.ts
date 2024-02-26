@@ -5,12 +5,12 @@ import ExpoAndroidSharedPreferencesModule from "./ExpoAndroidSharedPreferencesMo
 
 export { useSharedPreferences } from "./useSharedPreferences";
 
-export function get(key: string): string {
-  return ExpoAndroidSharedPreferencesModule.get(key);
+export function get(key: string, filename?: string): string {
+  return ExpoAndroidSharedPreferencesModule.get(key, filename);
 }
 
-export function set(key: string, value: string): void {
-  ExpoAndroidSharedPreferencesModule.set(key, value);
+export function set(key: string, value: string, filename?: string): void {
+  ExpoAndroidSharedPreferencesModule.set(key, value, filename);
 }
 
 const emitter = new EventEmitter(ExpoAndroidSharedPreferencesModule);
