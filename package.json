@@ -1,5 +1,5 @@
 {
-  "name": "expo-android-shared-preferences",
+  "name": "@wwdrew/expo-android-shared-preferences",
   "version": "0.1.0",
   "description": "Expo Module for Android SharedPreferences",
   "main": "build/index.js",
