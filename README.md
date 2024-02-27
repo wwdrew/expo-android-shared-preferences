@@ -15,10 +15,10 @@ For [managed](https://docs.expo.dev/archive/managed-vs-bare/) Expo projects, ple
 
 For bare React Native projects, you must ensure that you have [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/) before continuing.
 
-### Add the package to your npm dependencies
+### Add the package to your Expo project
 
 ```
-npm install @wwdrew/expo-android-shared-preferences
+npx expo install @wwdrew/expo-android-shared-preferences
 ```
 
 ## API Reference
