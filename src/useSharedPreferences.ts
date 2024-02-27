@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { get, set, addChangeListener } from "./index";
+import { getString, setString, addChangeListener } from "./index";
 
 export function useSharedPreferences(key: string) {
-  const [value, setValue] = useState(() => get(key));
+  const [value, setValue] = useState(() => getString(key));
 
   useEffect(() => {
     const subscription = addChangeListener((event) => {
@@ -18,7 +18,7 @@ export function useSharedPreferences(key: string) {
   }, [key]);
 
   function setNewValue(newValue: string) {
-    set(key, newValue);
+    setString(key, newValue);
   }
 
   return [value, setNewValue] as const;
