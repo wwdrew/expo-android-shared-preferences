@@ -6,7 +6,6 @@ Expo Module for Android SharedPreferences
 
 ## Installation in managed Expo projects
 
-
 ```
 npx expo install @wwdrew/expo-android-shared-preferences
 ```
