@@ -33,12 +33,56 @@ class ExpoAndroidSharedPreferencesModule : Module() {
       sharedPreferences().registerOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
-    Function("get") { key: String, filename: String? ->
+    Function("contains") { key: String, filename: String? ->
+      sharedPreferences(filename).contains(key)
+    }
+
+    Function("remove") { key: String, filename: String? ->
+      sharedPreferences(filename).edit().remove(key).commit()
+    }
+
+    Function("clear") { filename: String? ->
+      sharedPreferences(filename).edit().clear().commit()
+    }
+    
+    Function("getString") { key: String, filename: String? ->
       sharedPreferences(filename).getString(key, null)
     }
 
-    Function("set") { key: String, value: String, filename: String? ->
-      sharedPreferences(filename).edit().putString(key, value).apply()
+    Function("setString") { key: String, value: String, filename: String? ->
+      sharedPreferences(filename).edit().putString(key, value).commit()
+    }
+
+    Function("getInt") { key: String, filename: String? ->
+      sharedPreferences(filename).getInt(key, 0)
+    }
+
+    Function("setInt") { key: String, value: Int, filename: String? ->
+      sharedPreferences(filename).edit().putInt(key, value).commit()
+    }
+
+    Function("getLong") { key: String, filename: String? ->
+      sharedPreferences(filename).getString(key, null)
+    }
+
+    Function("setLong") { key: String, value: Long, filename: String? ->
+      sharedPreferences(filename).edit().putLong(key, value).commit()
+    }
+
+    Function("getFloat") { key: String, filename: String? ->
+      sharedPreferences(filename).getString(key, null)
+    }
+
+    Function("setFloat") { key: String, value: Float, filename: String? ->
+      sharedPreferences(filename).edit().putFloat(key, value).commit()
+    }
+
+    Function("getBoolean") { key: String, filename: String? ->
+      sharedPreferences(filename).getString(key, null)
+    }
+
+    Function("setBoolean") { key: String, value: Boolean, filename: String? ->
+      sharedPreferences(filename).edit().putBoolean(key, value).commit()
     }
   }
 }
