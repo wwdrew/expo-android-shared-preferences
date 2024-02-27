@@ -15,23 +15,23 @@ class ExpoAndroidSharedPreferencesModule : Module() {
     val file = filename ?: "${context.packageName}_preferences"
     return context.getSharedPreferences(file, Context.MODE_PRIVATE)
   }
-  private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-    val value = sharedPreferences().getString(key, null)
-
-    sendEvent("onChange", mapOf(
-      "key" to key,
-      "value" to value
-    ))
-  }
+//  private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+//    val value = sharedPreferences().getString(key, null)
+//
+//    sendEvent("onChange", mapOf(
+//      "key" to key,
+//      "value" to value
+//    ))
+//  }
   override fun definition() = ModuleDefinition {
 
     Name("ExpoAndroidSharedPreferences")
 
     Events("onChange")
 
-    OnCreate {
-      sharedPreferences().registerOnSharedPreferenceChangeListener(preferenceChangeListener)
-    }
+//    OnCreate {
+//      sharedPreferences().registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+//    }
 
     Function("contains") { key: String, filename: String? ->
       sharedPreferences(filename).contains(key)
@@ -45,40 +45,47 @@ class ExpoAndroidSharedPreferencesModule : Module() {
       sharedPreferences(filename).edit().clear().commit()
     }
     
-    Function("getString") { key: String, filename: String? ->
-      sharedPreferences(filename).getString(key, null)
+    // String
+    Function("getString") { key: String, defaultValue: String?, filename: String? ->
+      sharedPreferences(filename).getString(key, defaultValue)
     }
 
     Function("setString") { key: String, value: String, filename: String? ->
       sharedPreferences(filename).edit().putString(key, value).commit()
     }
 
-    Function("getInt") { key: String, filename: String? ->
-      sharedPreferences(filename).getInt(key, 0)
+    // Int
+    Function("getInt") { key: String, defaultValue: Int?, filename: String? ->
+      sharedPreferences(filename).getInt(key, defaultValue ?: 0)
     }
 
     Function("setInt") { key: String, value: Int, filename: String? ->
-      sharedPreferences(filename).edit().putInt(key, value).commit()
+      val editor = sharedPreferences(filename).edit()
+        editor.putInt(key, value)
+          editor.commit()
     }
 
-    Function("getLong") { key: String, filename: String? ->
-      sharedPreferences(filename).getString(key, null)
+    // Long
+    Function("getLong") { key: String, defaultValue: Long?, filename: String? ->
+      sharedPreferences(filename).getLong(key, defaultValue ?: 0L)
     }
 
     Function("setLong") { key: String, value: Long, filename: String? ->
       sharedPreferences(filename).edit().putLong(key, value).commit()
     }
 
-    Function("getFloat") { key: String, filename: String? ->
-      sharedPreferences(filename).getString(key, null)
+    // Float
+    Function("getFloat") { key: String, defaultValue: Float?, filename: String? ->
+      sharedPreferences(filename).getFloat(key, defaultValue ?: 0.0f)
     }
 
     Function("setFloat") { key: String, value: Float, filename: String? ->
       sharedPreferences(filename).edit().putFloat(key, value).commit()
     }
 
-    Function("getBoolean") { key: String, filename: String? ->
-      sharedPreferences(filename).getString(key, null)
+    // Boolean
+    Function("getBoolean") { key: String, defaultValue: Boolean?, filename: String? ->
+      sharedPreferences(filename).getBoolean(key, defaultValue ?: false)
     }
 
     Function("setBoolean") { key: String, value: Boolean, filename: String? ->
