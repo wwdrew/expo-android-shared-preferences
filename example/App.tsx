@@ -1,17 +1,4 @@
-import {
-  clear,
-  getBoolean,
-  getFloat,
-  getInt,
-  getLong,
-  getString,
-  remove,
-  setBoolean,
-  setFloat,
-  setInt,
-  setLong,
-  setString,
-} from "expo-android-shared-preferences";
+import * as SharedPreferences from "expo-android-shared-preferences";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
@@ -30,31 +17,55 @@ const BOOLEAN_INITIAL_VALUE = true;
 
 export default function App() {
   const [stringValue, setStringValue] = useState(
-    getString(STRING_KEY, STRING_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+    SharedPreferences.getString(
+      STRING_KEY,
+      STRING_INITIAL_VALUE,
+      EXAMPLE_PREFERENCES_FILE
+    )
   );
   const [intValue, setIntValue] = useState(
-    getInt(INT_KEY, INT_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+    SharedPreferences.getInt(
+      INT_KEY,
+      INT_INITIAL_VALUE,
+      EXAMPLE_PREFERENCES_FILE
+    )
   );
   const [floatValue, setFloatValue] = useState(
-    getFloat(FLOAT_KEY, FLOAT_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+    SharedPreferences.getFloat(
+      FLOAT_KEY,
+      FLOAT_INITIAL_VALUE,
+      EXAMPLE_PREFERENCES_FILE
+    )
   );
   const [longValue, setLongValue] = useState(
-    getLong(LONG_KEY, LONG_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+    SharedPreferences.getLong(
+      LONG_KEY,
+      LONG_INITIAL_VALUE,
+      EXAMPLE_PREFERENCES_FILE
+    )
   );
   const [booleanValue, setBooleanValue] = useState(
-    getBoolean(BOOLEAN_KEY, BOOLEAN_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+    SharedPreferences.getBoolean(
+      BOOLEAN_KEY,
+      BOOLEAN_INITIAL_VALUE,
+      EXAMPLE_PREFERENCES_FILE
+    )
   );
 
   function handleSetStringPress() {
     const random = Math.random().toString().substring(2, 8);
     setStringValue(random);
-    setString(STRING_KEY, random, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.setString(STRING_KEY, random, EXAMPLE_PREFERENCES_FILE);
   }
 
   function handleRemoveStringPress() {
-    remove(STRING_KEY, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.remove(STRING_KEY, EXAMPLE_PREFERENCES_FILE);
     setStringValue(
-      getString(STRING_KEY, STRING_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+      SharedPreferences.getString(
+        STRING_KEY,
+        STRING_INITIAL_VALUE,
+        EXAMPLE_PREFERENCES_FILE
+      )
     );
   }
 
@@ -62,25 +73,35 @@ export default function App() {
     const random = Number(Math.random().toString().substring(2, 4));
 
     setIntValue(random);
-    setInt(INT_KEY, random, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.setInt(INT_KEY, random, EXAMPLE_PREFERENCES_FILE);
   }
 
   function handleRemoveIntPress() {
-    remove(INT_KEY, EXAMPLE_PREFERENCES_FILE);
-    setIntValue(getInt(INT_KEY, INT_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE));
+    SharedPreferences.remove(INT_KEY, EXAMPLE_PREFERENCES_FILE);
+    setIntValue(
+      SharedPreferences.getInt(
+        INT_KEY,
+        INT_INITIAL_VALUE,
+        EXAMPLE_PREFERENCES_FILE
+      )
+    );
   }
 
   function handleSetLongPress() {
     const random = Number(Math.random().toString().substring(2, 10));
 
     setLongValue(random);
-    setLong(LONG_KEY, random, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.setLong(LONG_KEY, random, EXAMPLE_PREFERENCES_FILE);
   }
 
   function handleRemoveLongPress() {
-    remove(LONG_KEY, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.remove(LONG_KEY, EXAMPLE_PREFERENCES_FILE);
     setLongValue(
-      getLong(LONG_KEY, LONG_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+      SharedPreferences.getLong(
+        LONG_KEY,
+        LONG_INITIAL_VALUE,
+        EXAMPLE_PREFERENCES_FILE
+      )
     );
   }
 
@@ -88,30 +109,42 @@ export default function App() {
     const random = Math.random();
 
     setFloatValue(random);
-    setFloat(FLOAT_KEY, random, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.setFloat(FLOAT_KEY, random, EXAMPLE_PREFERENCES_FILE);
   }
 
   function handleRemoveFloatPress() {
-    remove(FLOAT_KEY, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.remove(FLOAT_KEY, EXAMPLE_PREFERENCES_FILE);
     setFloatValue(
-      getFloat(FLOAT_KEY, FLOAT_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+      SharedPreferences.getFloat(
+        FLOAT_KEY,
+        FLOAT_INITIAL_VALUE,
+        EXAMPLE_PREFERENCES_FILE
+      )
     );
   }
 
   function handleSetBooleanPress() {
-    setBoolean(BOOLEAN_KEY, !booleanValue, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.setBoolean(
+      BOOLEAN_KEY,
+      !booleanValue,
+      EXAMPLE_PREFERENCES_FILE
+    );
     setBooleanValue(!booleanValue);
   }
 
   function handleRemoveBooleanPress() {
-    remove(BOOLEAN_KEY, EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.remove(BOOLEAN_KEY, EXAMPLE_PREFERENCES_FILE);
     setBooleanValue(
-      getBoolean(BOOLEAN_KEY, BOOLEAN_INITIAL_VALUE, EXAMPLE_PREFERENCES_FILE),
+      SharedPreferences.getBoolean(
+        BOOLEAN_KEY,
+        BOOLEAN_INITIAL_VALUE,
+        EXAMPLE_PREFERENCES_FILE
+      )
     );
   }
 
   function handleClearPress() {
-    clear(EXAMPLE_PREFERENCES_FILE);
+    SharedPreferences.clear(EXAMPLE_PREFERENCES_FILE);
   }
 
   return (
