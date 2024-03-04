@@ -1,7 +1,7 @@
 import { EventEmitter, Subscription } from "expo-modules-core";
 
-import { ChangeEventPayload } from "./ExpoAndroidSharedPreferences.types";
-import ExpoAndroidSharedPreferencesModule from "./ExpoAndroidSharedPreferencesModule";
+import { ChangeEventPayload } from "./AndroidSharedPreferences.types";
+import ExpoAndroidSharedPreferencesModule from "./ExpoAndroidSharedPreferences";
 
 export { useSharedPreferences } from "./useSharedPreferences";
 
@@ -21,12 +21,12 @@ export function clear(filename?: string): void {
 export function getString(
   key: string,
   defaultValue?: string,
-  filename?: string,
+  filename?: string
 ): string {
   return ExpoAndroidSharedPreferencesModule.getString(
     key,
     defaultValue,
-    filename,
+    filename
   );
 }
 
@@ -38,7 +38,7 @@ export function setString(key: string, value: string, filename?: string): void {
 export function getInt(
   key: string,
   defaultValue?: number,
-  filename?: string,
+  filename?: string
 ): number {
   return ExpoAndroidSharedPreferencesModule.getInt(key, defaultValue, filename);
 }
@@ -51,12 +51,12 @@ export function setInt(key: string, value: number, filename?: string): void {
 export function getLong(
   key: string,
   defaultValue?: number,
-  filename?: string,
+  filename?: string
 ): number {
   return ExpoAndroidSharedPreferencesModule.getLong(
     key,
     defaultValue,
-    filename,
+    filename
   );
 }
 
@@ -68,12 +68,12 @@ export function setLong(key: string, value: number, filename?: string): void {
 export function getFloat(
   key: string,
   defaultValue?: number,
-  filename?: string,
+  filename?: string
 ): number {
   return ExpoAndroidSharedPreferencesModule.getFloat(
     key,
     defaultValue,
-    filename,
+    filename
   );
 }
 
@@ -85,19 +85,19 @@ export function setFloat(key: string, value: number, filename?: string): void {
 export function getBoolean(
   key: string,
   defaultValue?: boolean,
-  filename?: string,
+  filename?: string
 ): boolean {
   return ExpoAndroidSharedPreferencesModule.getBoolean(
     key,
     defaultValue,
-    filename,
+    filename
   );
 }
 
 export function setBoolean(
   key: string,
   value: boolean,
-  filename?: string,
+  filename?: string
 ): void {
   ExpoAndroidSharedPreferencesModule.setBoolean(key, value, filename);
 }
@@ -105,7 +105,7 @@ export function setBoolean(
 const emitter = new EventEmitter(ExpoAndroidSharedPreferencesModule);
 
 export function addChangeListener(
-  listener: (event: ChangeEventPayload) => void,
+  listener: (event: ChangeEventPayload) => void
 ): Subscription {
   return emitter.addListener<ChangeEventPayload>("onChange", listener);
 }

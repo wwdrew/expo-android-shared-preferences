@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { getString, setString, addChangeListener } from "./index";
+import {
+  getString,
+  setString,
+  addChangeListener,
+} from "./AndroidSharedPreferences";
 
 export function useSharedPreferences(key: string) {
   const [value, setValue] = useState(() => getString(key));
