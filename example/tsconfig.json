@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "expo-android-shared-preferences": ["../src/index"],
+      "expo-android-shared-preferences": ["../src/AndroidSharedPreferences.ts"],
       "expo-android-shared-preferences/*": ["../src/*"]
     }
   }
