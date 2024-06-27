@@ -3,8 +3,6 @@ import { EventEmitter, Subscription } from "expo-modules-core";
 import { ChangeEventPayload } from "./ExpoAndroidSharedPreferences.types";
 import ExpoAndroidSharedPreferencesModule from "./ExpoAndroidSharedPreferencesModule";
 
-export { useSharedPreferences } from "./useSharedPreferences";
-
 export function contains(key: string, filename?: string): boolean {
   return ExpoAndroidSharedPreferencesModule.contains(key, filename);
 }
